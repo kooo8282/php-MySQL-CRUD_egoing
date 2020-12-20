@@ -9,7 +9,8 @@ $sql = "select * from koo limit 1000";
 $result = mysqli_query($conn, $sql);
 $list = '';
 while($row = mysqli_fetch_array($result)){    
-    $list = $list."<li>{$row['title']}</li>";
+    //<li><a href="index.php?id=5">mysql</a></li>
+    $list = $list."<li><a href=\"index.php?id={$row['id']}\">{$row['title']}</a></li>";
 }
 ?>
 
@@ -22,12 +23,15 @@ while($row = mysqli_fetch_array($result)){
 <body>
     <h1><a href="index.php">WEB</a></h1>
     <ol>
-        <?php
-        echo $list;
-        ?>      
+        <?= $list ?>      
     </ol>
     <a href="create.php">Create</a>
-    <h2>Welcome</h2>
+    <h2>
+        <?php
+        echo $_GET['id']
+        ?>
+
+    </h2>
     HTML is Lorem ipsum dolor sit amet consectetur, adipisicing elit.
 </body>
 </html>
