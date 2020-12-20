@@ -12,6 +12,20 @@ while($row = mysqli_fetch_array($result)){
     //<li><a href="index.php?id=5">mysql</a></li>
     $list = $list."<li><a href=\"index.php?id={$row['id']}\">{$row['title']}</a></li>";
 }
+// default article at index.php
+$article = array(
+    'title'=>'Welcome',
+    'description'=>'We are buliding CRUD in PHP-MySQL.'
+);
+// print article
+if(isset($_GET['id'])){
+$sql = "select * from koo where id={$_GET['id']}";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result);
+$article['title']=$row['title'];
+$article['description']=$row['description'];
+}
+// print_r($article);
 ?>
 
 <!DOCTYPE html>
@@ -26,12 +40,7 @@ while($row = mysqli_fetch_array($result)){
         <?= $list ?>      
     </ol>
     <a href="create.php">Create</a>
-    <h2>
-        <?php
-        echo $_GET['id']
-        ?>
-
-    </h2>
-    HTML is Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+    <h2><?= $article['title'];?></h2>
+    <?= $article['description'];?>
 </body>
 </html>
