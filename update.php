@@ -29,7 +29,8 @@ if(isset($_GET['id'])){
     $article['title']=htmlspecialchars($row['title']);
     $article['description']=htmlspecialchars($row['description']);
     
-    $update_link = '<a href="update.php?id='.$_GET['id'].'">Update</a>'; 
+    $update_link = '<a href="update.php?id='.$_GET['id'].'">Update</a>';
+    
     }
 
 // print_r($article);
