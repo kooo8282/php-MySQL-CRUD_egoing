@@ -46,9 +46,10 @@ if(isset($_GET['id'])){
     <ol>
         <?= $list ?>      
     </ol>
-    <a href="create.php">Create</a>
-    <?=$update_link?>
-    <h2><?= $article['title'];?></h2>
-    <?= $article['description'];?>
+    <form action="process_update.php" method="post">
+        <p><input type="text" name="title" placeholder="Title" value="<?=$article['title']?>"></p>
+        <p><textarea name="description" cols="30" rows="10" placeholder="description"><?=$article['description']?></textarea></p>
+        <input type="submit" value="submit">
+    </form>
 </body>
 </html>
