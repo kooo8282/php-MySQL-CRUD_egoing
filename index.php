@@ -16,20 +16,22 @@ while($row = mysqli_fetch_array($result)){
 // default article at index.php
 $article = array(
     'title'=>'Welcome',
-    'description'=>'We are buliding CRUD using PHP-MySQL interface.'
+    'description'=>'We are buliding CRUD using PHP-MySQL interface.'   
 );
 // print article
 $update_link = '';
 $delete_btn = '';
+$author = '';
 if(isset($_GET['id'])){
     $filtered_id = mysqli_real_escape_string($conn, $_GET['id']);
-    $sql = "select * from koo where id={$filtered_id}";
+    $sql = "select * from koo left join author on koo.author_id=author.id where koo.id={$filtered_id}";
     // $sql = "select * from koo where id={$_GET['id']}";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result);
     $article['title']=htmlspecialchars($row['title']);
     $article['description']=htmlspecialchars($row['description']);
     
+    $article['name']=htmlspecialchars($row['name']);
     $update_link = '<a href="update.php?id='.$_GET['id'].'">Update</a>'; 
     $delete_btn = '
         <form action="process_delete.php" method="post">
@@ -37,6 +39,7 @@ if(isset($_GET['id'])){
             <input type="submit" value="Delete">
         </form>    
     ';
+    $author = '<p>by <b>'.$article['name'].'</p>';
     }
 
 // print_r($article);
@@ -56,7 +59,8 @@ if(isset($_GET['id'])){
     <a href="create.php">Create</a>
     <?=$update_link?>
     <?=$delete_btn?>    
-    <h2><?= $article['title'];?></h2>
-    <?= $article['description'];?>
+    <h2><?= $article['title']?></h2>
+    <p><?= $article['description']?></p>
+    <?=$author?> 
 </body>
 </html>
