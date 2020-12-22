@@ -13,6 +13,14 @@ while($row = mysqli_fetch_array($result)){
     $escaped_title = htmlspecialchars($row['title']);
     $list = $list."<li><a href=\"index.php?id={$row['id']}\">{$escaped_title}</a></li>";
 }
+
+$sql = "select * from author limit 1000";
+$result = mysqli_query($conn, $sql);
+$select_form = '<select name="author_id">';
+while($row = mysqli_fetch_array($result)){            
+    $select_form .= '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+}
+$select_form .= '<select>';
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +37,8 @@ while($row = mysqli_fetch_array($result)){
     <form action="process_create.php" method="post">
         <p><input type="text" name="title" placeholder="Title"></p>
         <p><textarea name="description" cols="30" rows="10" placeholder="description"></textarea></p>
-        <input type="submit" value="submit">
+        <?=$select_form?>
+        <p><input type="submit" value="submit"></p>
     </form>
 </body>
 </html>
