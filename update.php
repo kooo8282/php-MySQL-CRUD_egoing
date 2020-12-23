@@ -51,7 +51,7 @@ if(isset($_GET['id'])){
         <input type="hidden" name="id" value="<?=$_GET['id']?>">
         <p><input type="text" name="title" placeholder="Title" value="<?=$article['title']?>"></p>
         <p><textarea name="description" cols="30" rows="10" placeholder="description"><?=$article['description']?></textarea></p>
-        <input type="submit" value="submit">
+        <p><input type="submit" value="submit"></p>
     </form>
 </body>
 </html>

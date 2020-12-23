@@ -22,6 +22,7 @@ $conn = mysqli_connect(
             <td>name</td>
             <td>profile</td>
             <td></td>
+            <td></td>
             <?php
             $sql = "select * from author";
             $result = mysqli_query($conn, $sql);
@@ -37,6 +38,12 @@ $conn = mysqli_connect(
                 <td><?=$filtered['name']?></td>
                 <td><?=$filtered['profile']?></td>
                 <td><a href="author.php?id=<?=$filtered['id']?>">update</a></td>
+                <td>
+                    <form action="process_delete_author.php" method="post" onsubmit="if(!confirm('Are you sure?')){return false;};">
+                        <input type="hidden" name="id" value="<?=$filtered['id']?>">
+                        <input type="submit" value="delete">
+                    </form>
+                </td>
             </tr>
             <?php
             }
